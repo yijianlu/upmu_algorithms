@@ -22,7 +22,7 @@ class Example1HZ(qdf.QuasarDistillate):
 
         #If this is incremented, it is assumed that the whole distillate is invalidated, and it
         #will be deleted and discarded. In addition all 'persist' data will be removed
-        self.set_version(8)
+        self.set_version(9)
 
     @defer.inlineCallbacks
     def compute(self):
@@ -39,7 +39,7 @@ class Example1HZ(qdf.QuasarDistillate):
         #The first parameter is the name of the data point we stored. The second is what value
         #to get back if it did not exist.
         last_end_date = self.unpersist("end_timestamp", None)
-        target_end_date = self.date("2014-08-17T00:20:00")
+        target_end_date = self.date("2014-08-17T00:30:00")
 
         if last_end_date is None:
             #this is the first time we have run this algorithm or we
@@ -57,7 +57,7 @@ class Example1HZ(qdf.QuasarDistillate):
             for i in xrange(120):
                 delta = 8333333 #This corresponds with the one used by the uPMUs
                 values_1hz.append((timestamp + delta*i, np.sin( 2*np.pi   * i*delta/1E9)))
-                values_2hz.append((timestamp + delta*i, 2*np.sin( 2*2*np.pi * i*delta/1E9)))
+                values_2hz.append((timestamp + delta*i, np.sin( 2*2*np.pi * i*delta/1E9)))
 
             if len(values_1hz) >= qdf.OPTIMAL_BATCH_SIZE:
                 yield self.stream_insert_multiple("1hz", values_1hz)
