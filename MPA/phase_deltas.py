@@ -58,17 +58,17 @@ class DistillateDriver(qdf.QuasarDistillate):
 
                 current = start
                 while current < end:
-                    #we only want to do 5 minutes at a time
-                    window_end = current + 5 * qdf.MINUTE
+                    #we only want to do 15 minutes at a time
+                    window_end = current + 15 * qdf.MINUTE
                     if window_end > end:
                         window_end = end
                     _, vals_a = yield self.stream_get(pair[0][0], current, window_end)
                     if len(vals_a) == 0:
-                        current += 5*qdf.MINUTE
+                        current += 15*qdf.MINUTE
                         continue
                     _, vals_b = yield self.stream_get(pair[1][0], current, window_end)
                     if len(vals_b) == 0:
-                        current += 5*qdf.MINUTE
+                        current += 15*qdf.MINUTE
                         continue
                     
                     delta_values = []
@@ -95,7 +95,7 @@ class DistillateDriver(qdf.QuasarDistillate):
                     print "Inserting values: ", len(delta_values)
                     yield self.stream_insert_multiple(streamname, delta_values)
 
-                    current += 5 * qdf.MINUTE
+                    current += 15 * qdf.MINUTE
 
         # we don't need to use any persistence, because the latest versions we used are stored in the metadata
 
