@@ -20,9 +20,9 @@ class DistillateDriver(qdf.QuasarDistillate):
         #This is just a variable custom to this distillate, it is not part of the framework
         targets = [
             ("switch_a6_L1", "adf13e17-44b7-4ef6-ae3f-fde8a9152ab7", 0),
-         #   ("switch_a6_L2", "4f56a8f1-f3ca-4684-930e-1b4d9955f72c", 0),
-         #   ("switch_a6_L3", "2c07ccef-20c5-4971-87cf-2c187ce5f722", 0),
-         #   ("soda_b_L1", "98435be7-7341-4661-b104-16af89e0333d", 0),
+            ("switch_a6_L2", "4f56a8f1-f3ca-4684-930e-1b4d9955f72c", 0),
+            ("switch_a6_L3", "2c07ccef-20c5-4971-87cf-2c187ce5f722", 0),
+            ("soda_b_L1", "98435be7-7341-4661-b104-16af89e0333d", 0),
             ("soda_a_L1", "4d6525a9-b8ad-48a4-ae98-b171562cf817", 0),
         ]
 
@@ -36,7 +36,7 @@ class DistillateDriver(qdf.QuasarDistillate):
 
         #If this is incremented, it is assumed that the whole distillate is invalidated, and it
         #will be deleted and discarded. In addition all 'persist' data will be removed
-        self.set_version(2)
+        self.set_version(3)
 
     @defer.inlineCallbacks
     def compute(self):
@@ -82,7 +82,7 @@ class DistillateDriver(qdf.QuasarDistillate):
                         if vals_a[idx1].time > vals_b[idx2].time:
                             idx2 += 1
                             continue
-                        delta = vals_a[idx1].value - vals_b[idx2].value
+                        delta = vals_a[idx1].value - vals_b[idx2].value + pairs[0][2] + pairs[1][2]
                         if delta < -180:
                             delta += 360
                         elif delta >= 180:
