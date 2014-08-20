@@ -50,7 +50,7 @@ class DistillateDriver(qdf.QuasarDistillate):
             streamname = pair[0][0] + "-" + pair[1][0]
 
             changed_ranges = yield self.get_changed_ranges([pair[0][0], pair[1][0]], "auto")
-
+            print "got changed ranges"
             for start, end in changed_ranges:
                 print ("Computing for pair %s/&s from time %d to %d" % (pair[0][0],pair[1][0], start, end))
                 #delete whatever data we had generated for that range
