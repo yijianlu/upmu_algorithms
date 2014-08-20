@@ -29,7 +29,7 @@ class DistillateDriver(qdf.QuasarDistillate):
         for stream in targets:
             self.use_stream(stream[0], stream[1])
 
-        self.pairs = list(itertools.combinations(targets), 2)
+        self.pairs = list(itertools.combinations(targets, 2))
         for p in self.pairs:
             streamname = p[0][0] + "-" + p[1][0]
             self.add_stream(streamname, unit="degrees")
