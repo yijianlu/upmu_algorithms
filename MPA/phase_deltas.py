@@ -36,7 +36,7 @@ class DistillateDriver(qdf.QuasarDistillate):
 
         #If this is incremented, it is assumed that the whole distillate is invalidated, and it
         #will be deleted and discarded. In addition all 'persist' data will be removed
-        self.set_version(1)
+        self.set_version(2)
 
     @defer.inlineCallbacks
     def compute(self):
@@ -63,8 +63,14 @@ class DistillateDriver(qdf.QuasarDistillate):
                     if window_end > end:
                         window_end = end
                     _, vals_a = yield self.stream_get(pair[0][0], current, window_end)
+                    if len(vals_a) == 0:
+                        current += 5*qdf.MINUTE
+                        continue
                     _, vals_b = yield self.stream_get(pair[1][0], current, window_end)
-
+                    if len(vals_b) == 0:
+                        current += 5*qdf.MINUTE
+                        continue
+                    
                     delta_values = []
 
                     idx1 = 0
