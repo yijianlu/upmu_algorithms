@@ -86,6 +86,7 @@ class DistillateDriver(qdf.QuasarDistillate):
                         idx1 += 1
                         idx2 += 1
 
+                    print "Inserting values: ", len(delta_values)
                     yield self.stream_insert_multiple(streamname, delta_values)
 
                     current += 5 * qdf.MINUTE
