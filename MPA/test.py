@@ -24,7 +24,7 @@ class DistillateDriver(qdf.QuasarDistillate):
 
         #If this is incremented, it is assumed that the whole distillate is invalidated, and it
         #will be deleted and discarded. In addition all 'persist' data will be removed
-        self.set_version(4)
+        self.set_version(5)
 
     @defer.inlineCallbacks
     def compute(self):
