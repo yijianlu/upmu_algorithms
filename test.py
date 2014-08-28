@@ -14,10 +14,10 @@ class DistillateDriver(qdf.QuasarDistillate):
         self.set_author("MPA")
 
         #This is the second level. This name should be unique for every algorithm you write
-        self.set_name("Delta3")
+        self.set_name("difference1")
 
         #This is the final level. You can have multiple of these
-        self.add_stream("delta", unit="Degrees")
+        self.add_stream("difference", unit="Degrees")
 
         self.use_stream("2hz", "571ce598-3ffd-499b-be6c-0df52e597c93")
         self.use_stream("1hz", "49129d4a-335e-4c81-a8a4-27f5d8c45646")
